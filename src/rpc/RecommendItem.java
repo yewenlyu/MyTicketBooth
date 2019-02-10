@@ -1,7 +1,6 @@
 package rpc;
 
 import java.io.IOException;
-import java.io.PrintWriter;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -35,7 +34,6 @@ public class RecommendItem extends HttpServlet {
 			HttpServletResponse response) throws ServletException, IOException {
 		response.setContentType("application/json");
 
-		PrintWriter out = response.getWriter();
 		JSONArray array = new JSONArray();
 		
 		try {
@@ -45,8 +43,7 @@ public class RecommendItem extends HttpServlet {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		out.print(array);
-		out.close();		
+		RpcHelper.writeJsonArray(response, array);		
 	}
 
 	/**
