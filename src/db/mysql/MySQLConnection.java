@@ -36,14 +36,42 @@ public class MySQLConnection implements DBConnection {
 
 	@Override
 	public void setFavoriteItems(String userId, List<String> itemIds) {
-		// TODO Auto-generated method stub
+		if (conn == null) {
+			System.err.println("DB connection failed");
+			return;
+		}
 
+		try {
+			String sql = "INSERT IGNORE INTO history(user_id, item_id) VALUES (?, ?)";
+			PreparedStatement ps = conn.prepareStatement(sql);
+			ps.setString(1, userId);
+			for (String itemId : itemIds) {
+				ps.setString(2, itemId);
+				ps.execute();
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 	}
 
 	@Override
 	public void unsetFavoriteItems(String userId, List<String> itemIds) {
-		// TODO Auto-generated method stub
+		if (conn == null) {
+			System.err.println("DB connection failed");
+			return;
+		}
 
+		try {
+			String sql = "DELETE FROM history WHERE user_id = ? AND item_id = ?";
+			PreparedStatement ps = conn.prepareStatement(sql);
+			ps.setString(1, userId);
+			for (String itemId : itemIds) {
+				ps.setString(2, itemId);
+				ps.execute();
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 	}
 
 	@Override
@@ -86,8 +114,9 @@ public class MySQLConnection implements DBConnection {
 		// sql injection
 		// select * from users where username = '' AND password = '';
 
-		// username: fakeuser ' OR 1 = 1; DROP  --
-		// select * from users where username = 'fakeuser ' OR 1 = 1 --' AND password = '';
+		// username: fakeuser ' OR 1 = 1; DROP --
+		// select * from users where username = 'fakeuser ' OR 1 = 1 --' AND password =
+		// '';
 
 		try {
 			String sql = "INSERT IGNORE INTO items VALUES (?, ?, ?, ?, ?, ?, ?)";
@@ -104,7 +133,7 @@ public class MySQLConnection implements DBConnection {
 			sql = "INSERT IGNORE INTO categories VALUES(?, ?)";
 			ps = conn.prepareStatement(sql);
 			ps.setString(1, item.getItemId());
-			
+
 			for (String category : item.getCategories()) {
 				ps.setString(2, category);
 				ps.execute();
