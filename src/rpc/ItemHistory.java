@@ -41,7 +41,7 @@ public class ItemHistory extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		
+
 		// allow access only if session exists
 		HttpSession session = request.getSession(false);
 		if (session == null) {
@@ -75,7 +75,7 @@ public class ItemHistory extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		
+
 		// allow access only if session exists
 		HttpSession session = request.getSession(false);
 		if (session == null) {
@@ -107,7 +107,7 @@ public class ItemHistory extends HttpServlet {
 	 */
 	protected void doDelete(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		
+
 		// allow access only if session exists
 		HttpSession session = request.getSession(false);
 		if (session == null) {

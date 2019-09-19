@@ -83,16 +83,16 @@ public class MySQLConnection implements DBConnection {
 		if (conn == null) {
 			return new HashSet<>();
 		}
-		
+
 		Set<String> favoriteItems = new HashSet<>();
-		
+
 		try {
 			String sql = "SELECT item_id FROM history WHERE user_id = ?";
 			PreparedStatement stmt = conn.prepareStatement(sql);
 			stmt.setString(1, userId);
-			
+
 			ResultSet rs = stmt.executeQuery();
-			
+
 			while (rs.next()) {
 				String itemId = rs.getString("item_id");
 				favoriteItems.add(itemId);
@@ -100,7 +100,7 @@ public class MySQLConnection implements DBConnection {
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-		
+
 		return favoriteItems;
 	}
 
@@ -221,7 +221,7 @@ public class MySQLConnection implements DBConnection {
 		if (conn == null) {
 			return "";
 		}
-		
+
 		String name = "";
 		try {
 			String sql = "SELECT first_name, last_name FROM users WHERE user_id = ?";
@@ -243,7 +243,7 @@ public class MySQLConnection implements DBConnection {
 		if (conn == null) {
 			return false;
 		}
-		
+
 		try {
 			String sql = "SELECT user_id FROM users WHERE user_id = ? AND password = ?";
 			PreparedStatement statement = conn.prepareStatement(sql);
@@ -258,7 +258,7 @@ public class MySQLConnection implements DBConnection {
 		} catch (SQLException e) {
 			System.out.println(e.getMessage());
 		}
-	
+
 		return false;
 	}
 
