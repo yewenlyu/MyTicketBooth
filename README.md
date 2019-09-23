@@ -1,2 +1,5 @@
 # MyTicketBooth
-Ticket recommendation web service with RESTful APIs, backed by TicketMaster API
+
+This ticket recommendation system is backed by TicketMaster API, deployed on AWS.
+
+![Project Structure](docs/ProjectStructure.png)
